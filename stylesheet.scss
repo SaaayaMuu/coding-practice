@@ -4,6 +4,16 @@
     padding: 0;
 }
 
+
+$break: 900px;
+
+@mixin break {
+    @media screen and (max-width: ($break)) {
+        @content;
+    }
+}
+
+
 @mixin student-img {
     background-color: #ccc;
     width:120px;
@@ -19,6 +29,12 @@
     padding: 16px;
     display: flex;
     align-items: center;
+    @include break {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 30px;
+    }
 }
 
 
@@ -108,6 +124,9 @@ body {
         width: 100%;
         height: 100px;
         padding: 40px 0 0 50px;
+        @include break{
+            padding: 25px 0 0 25px;
+        }
         
         img {
             max-width: 100px;
@@ -120,6 +139,10 @@ body {
             position: fixed;
             top: 0;
             right: 0;
+            @include break{
+                width: 75px;
+                height: 75px;
+            }
             
             cursor: pointer;
             .menu-trigger {
@@ -133,27 +156,43 @@ body {
                     position: absolute;
                     left: 25px;
                     transition: 0.3s ease-in-out;
+                    @include break {
+                        width: 35px;
+                        left: 20px;
+                    }
                     &:nth-child(1) {
                         top: 35px;
+                        @include break {
+                            top: 25px;
+                        }
                     }
                     &:nth-child(2) {
                         top: 50px;
+                        @include break {
+                            top: 36px;
+                        }
                     }
                     &:nth-child(3) {
                         bottom: 35px;
+                        @include break {
+                            bottom: 25px;
+                        }
                     }
                 }
                 &.active {
                     span:nth-child(1) {
                         // -webkit-transform: translateY(10px) rotate(-45deg);
                         transform: translateY(14px) rotate(-45deg);
+                        @include break {
+                            transform: translateY(11px) rotate(-45deg);
+                        }
                     }
                     span:nth-child(2) {
                         opacity: 0;
                     }
                     span:nth-child(3) {
                         // -webkit-transform: translateY(-10px) rotate(45deg);
-                        transform: translateY(-14px) rotate(45deg);
+                        transform: translateY(-11px) rotate(45deg);
                     }
                 }
             }
@@ -169,7 +208,9 @@ body {
             overflow: hidden;
             position: relative;
             margin-bottom: 100px;
-
+            @include break {
+                height: 530px;
+            }
             .fade {
                 li {
                     list-style: none;
@@ -186,6 +227,9 @@ body {
                     infinite：アニメーションの処理を無限に繰り返す
                     */
                     animation: fade 15s infinite;
+                    @include break {
+                        width: 100%;
+                    }
                     &:nth-of-type(1) {
                         animation-delay: 0s;//アニメーションがいつ始まるかを指定
                     }
@@ -210,6 +254,9 @@ body {
                         width: 100%;
                         height: 720px;
                         object-fit: cover;
+                        @include break {
+                            height: 360px;
+                        }
                     }
                 }
             }  
@@ -236,19 +283,30 @@ body {
                 }
             }
             .hero-text {
+                width: 100%;
                 position: absolute;
                 bottom: 200px;
                 left: 15%;
+                @include break {
+                    bottom: 0;
+                    left: 5%;
+                }
                 p {
                     font-size: 3em;
                     font-weight: bold;
                     text-shadow: 0 4px 6px #fff;
                     margin-bottom: 40px;
+                    @include break {
+                        font-size: 25px;
+                        margin-bottom: 15px;
+                    }
                 }
                 a {
+                    width: 450px;
                     display: block;
                     background-color: red;
                     color: white;
+                    text-align: center;
                     text-decoration: none;
                     font-size: 1.5em;
                     padding: 20px 110px;
@@ -256,6 +314,10 @@ body {
                     border-radius: 10px;
                     transition: 0.3s;
                     position: relative;
+                    @include break {
+                        width: 90%;
+                        font-size: 20px;
+                    }
                     &:hover {
                         transform: scale(1.05);
                         opacity: 0.8;
@@ -283,14 +345,21 @@ body {
             height: 700px;
             padding: 80px 0;
             margin-bottom: 100px;
+            @include break {
+                height: 450px;
+                padding: 50px 0;
+            }
             .slide-content {
                 background-color: white;
-                width: 50%;
+                width: 80%;
                 height: 250px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 opacity: 0;
+                @include break {
+                    height: 150px;
+                }
                 p:nth-child(1) {
                     font-size: 1.7em;
                     color: red;
@@ -304,6 +373,9 @@ body {
             .inview-slide-left {
                 margin-bottom: 40px;
                 border-radius: 0 40px 40px 0 ;
+                @include break {
+                    margin-bottom: 50px;
+                }
                 img {
                     width: 90px;
                     object-fit: contain;
@@ -325,10 +397,8 @@ body {
             }
 
             .inview-slide-right {
+                margin: 0 0 0 auto;
                 border-radius: 40px 0 0 40px;
-
-                // border-top-left-radius: 20px;
-                // border-bottom-left-radius: 20px;
                 img {
                     width: 80px;
                     object-fit: contain;
@@ -340,12 +410,13 @@ body {
             }
             @keyframes slide-right {
                 0% {
-                  transform: translateX(150%);
+                    transform: translateX(50%);
                 }
                 100% {
-                  opacity: 1;
-                  transform: translateX(100%);
+                    opacity: 1;
+                    transform: translateX(0%);
                 }
+
             }
 
         }
@@ -364,9 +435,15 @@ body {
             .voice-content1 {
                 display: flex;
                 margin-bottom: 50px;
+                @include break {
+                    flex-direction: column-reverse;
+                }
                 .student1 {
                     margin-right: 20px;
                     text-align: center;
+                    @include break {
+                        margin-right: 0;
+                    }
                     img {
                         @include student-img
                     }
@@ -382,15 +459,27 @@ body {
                     margin-left: -30px;
                     border: 15px solid transparent;
                     border-right: 15px solid #e9f1fb;
+                    @include break {
+                        left: 50%;
+                        top: 100%;
+                        margin-left: -15px;
+                        transform: rotate(-90deg);
+                    }
                 }
             }
             .voice-content2 {
                 display: flex;
                 justify-content: flex-end;
                 margin-bottom: 50px;
+                @include break {
+                    flex-direction: column;
+                }
                 .student2 {
                     margin-left: 20px;
                     text-align: center;
+                    @include break {
+                        margin-left: 0;
+                    }
                     img {
                         @include student-img
                     }
@@ -406,14 +495,27 @@ body {
                     margin-top: -15px;
                     border: 15px solid transparent;
                     border-left: 15px solid #e9f1fb;
+                    @include break {
+                        left: 50%;
+                        top: 100%;
+                        margin-top: 0;
+                        margin-left: -10px;
+                        transform: rotate(90deg);
+                    }
                 }
                 
             }
             .voice-content3 {
                 display: flex;
+                @include break {
+                    flex-direction: column-reverse;
+                }
                 .student3 {
                     margin-right: 20px;
                     text-align: center;
+                    @include break {
+                        margin-right: 0;
+                    }
                     img {
                         @include student-img
                     }
@@ -429,6 +531,12 @@ body {
                     margin-left: -30px;
                     border: 15px solid transparent;
                     border-right: 15px solid #e9f1fb;
+                    @include break {
+                        left: 50%;
+                        top: 100%;
+                        margin-left: -15px;
+                        transform: rotate(-90deg);
+                    }
                 }
             }
         }
@@ -455,25 +563,45 @@ body {
                 justify-content: center;
                 // justify-content: space-between;
                 li {
-                    width: 400px;
+                    width: 35%;
                     height: 300px;
                     background-color: #fff;
                     list-style: none;
                     border-radius: 20px;
                     margin: 0 20px;
                     padding: 50px;
+                    @include break {
+                        width: 90%;
+                        height: 180px;
+                        padding: 20px;
+                    }
                     h3 {
                         font-size: 28px;
                         margin-bottom: 10px;
+                        @include break {
+                            font-size: 20px;
+                            margin-bottom: 5px;
+                        }
                     }
                     h4 {
                         font-size: 18px;
                         margin-bottom: 30px;
+                        @include break {
+                            font-size: 12px;
+                        }
                         
                     }
                 }
                 li:nth-child(1),li:nth-child(2) {
                     margin-bottom: 40px;
+                    @include break {
+                        margin-bottom: 25px;
+                    }
+                }
+                @include break {
+                    li:nth-child(3) {
+                        margin-bottom: 25px;
+                    }  
                 }
 
             }
@@ -486,6 +614,10 @@ body {
             h3 {
                 font-size: 28px;
                 margin-bottom: 10px;
+                @include break {
+                    font-size: 2em;
+                }
+
             }
             p {
                 font-size: 1em;
@@ -502,6 +634,9 @@ body {
                 display: block;
                 font-weight: bold;
                 transition: 0.5s;
+                @include break {
+                    font-size: 2em;
+                }
             }
             a:hover {
                 background-color: #fff;
@@ -516,13 +651,24 @@ body {
             .footer-box {
                 display: flex;
                 justify-content: space-around;
+                @include break {
+                    flex-wrap: wrap;
+                    padding: 0 10px;
+                }
                 .footer-content {
+                    @include break {
+                        width: 50%;
+                        &:nth-child(1),&:nth-child(2) {
+                            margin-bottom: 10px;
+                        }
+                    }
                     p {
                         font-weight: bold;
                         margin-bottom: 10px;
                     }
                     ul {
                         margin-left: 5px;
+
                         li {
                             list-style: none;
                             a {
